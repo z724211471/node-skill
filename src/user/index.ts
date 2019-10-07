@@ -1,4 +1,4 @@
-let User=require('../../db/user/user')
+let User=require('../../db/user/user.js')
 
 function userReg(req,res,next){
   var mobile = req.body.mobile;
@@ -19,6 +19,4 @@ function userReg(req,res,next){
 
 
 
-module.exports={
-  userReg
-}
+module.exports={userReg}

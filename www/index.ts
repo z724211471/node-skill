@@ -1,17 +1,18 @@
-const Koa=require('koa')
-const app = new Koa();
-const Router = require('koa-router');
-const mongoose=require('../db/index')
-const User=require('../src/user/index.ts')
-let router = new Router();
+import * as Koa from 'koa'
+import * as Router from 'koa-router'
+import connectDatabase from '../src/db/index'
+const app = new Koa()
 
+const User = require('../db/user/user')
+let router = new Router()
+const dburl = 'mongodb://127.0.0.1:27017/mydb'
+connectDatabase(dburl)
 app.use(async ctx => {
-  ctx.body = 'Hello World';
-});
-console.log(User)
-router.post('re',User.userReg)
-app.use(router.routes()).use(router.allowedMethods())
+  ctx.body = 'Hello World'
+})
+
+router.post('/re', User.userReg)
+app.use(router.routes())
 // Use connect method to connect to the server
 
-
-app.listen(3000);
+app.listen(3000)
