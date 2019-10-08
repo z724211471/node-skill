@@ -1,18 +1,22 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": true,
+    "lib": [
+      "es5",
+      "es6"
+    ],
     "target": "es6",
-    "removeComments": true,
-    "preserveConstEnums": true,
-    "sourceMap": true,
-    "outDir": "./dist"
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "www/index.ts"
   ],
   "exclude": [
-    "node_modules",
-    "www/**/*"
+    "node_modules"
   ]
 }

@@ -10,12 +10,11 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^8.5.1",
-    "koa": "^2.8.1",
-    "koa-router": "^7.4.0",
-    "mongodb": "^3.3.2",
-    "mongoose": "^5.7.1"
+    "ts-loader": "^6.2.0"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-typescript": "^7.6.0",
     "@types/koa": "^2.0.50",
     "@types/koa-router": "^7.0.42",
     "@types/mongodb": "^3.3.5",

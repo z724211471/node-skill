@@ -3,7 +3,7 @@ import * as Router from 'koa-router'
 import connectDatabase from '../src/db/index'
 const app = new Koa()
 
-const User = require('../db/user/user')
+// const User = require('../db/user/user')
 let router = new Router()
 const dburl = 'mongodb://127.0.0.1:27017/mydb'
 connectDatabase(dburl)
