@@ -4,5 +4,8 @@ export default function connectDatabase(url: string) {
   db.on('error', err => {
     console.error('%s', err)
   }).on('close', () => console.log('connect success'))
-  return connect(url)
+  return connect(
+    url,
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  )
 }

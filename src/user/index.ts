@@ -1,22 +1,25 @@
-let User=require('../../db/user/user.js')
+import UserModel from '../db/user'
 
-function userReg(req,res,next){
-  var mobile = req.body.mobile;
-  console.log(req.body)
-  var regUser = new User({
-      mobile: req.body.mobile,
-      pwd: req.body.pwd,
-      name: req.body.name
-  });
-  regUser.save(function (err, content) {
-      if (err) {
-          return res.send({status: 0, msg: err || '注册失败'});
-      } else {
-          return res.send({status: 1, msg: "注册成功"});
-      }
+function userReg(ctx, res) {
+  //   var mobile = ctx.body.username
+  let body = ctx.request.body
+  console.log(ctx.request.body)
+  console.log(res)
+  var regUser = new UserModel({
+    username: body.username,
+    password: body.password,
+    createtime: new Date().getTime() + 86400000
   })
+  regUser.save(function(err, content) {
+    console.log(err)
+    console.log(content)
+    if (err) {
+      ctx.body = { status: 0, msg: err || '注册失败' }
+    } else {
+      ctx.body = { status: 1, msg: '注册成功' }
+    }
+  })
+  console.log(UserModel.find({ toJSON: true }))
 }
 
-
-
-module.exports={userReg}
+export { userReg }
