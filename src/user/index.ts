@@ -1,25 +1,35 @@
 import UserModel from '../db/user'
-
 function userReg(ctx, res) {
   //   var mobile = ctx.body.username
   let body = ctx.request.body
-  console.log(ctx.request.body)
-  console.log(res)
+  if (!body['username'] || !body['password']) {
+    return (ctx.body = {
+      code: 400,
+      msg: '用户名或密码不能为空'
+    })
+  }
   var regUser = new UserModel({
     username: body.username,
     password: body.password,
-    createtime: new Date().getTime() + 86400000
+    createtime: new Date()
   })
-  regUser.save(function(err, content) {
-    console.log(err)
-    console.log(content)
-    if (err) {
-      ctx.body = { status: 0, msg: err || '注册失败' }
-    } else {
-      ctx.body = { status: 1, msg: '注册成功' }
-    }
-  })
-  console.log(UserModel.find({ toJSON: true }))
+  return regUser
+    .save()
+    .then(rec => {
+      ctx.body = {
+        code: 200,
+        msg: '注册成功'
+      }
+      console.log(rec)
+    })
+    .catch(err => {
+      ctx.body = {
+        code: 400,
+        msg: '注册失败,请重试'
+      }
+      console.log('112154')
+      console.log(err)
+    })
 }
 
 export { userReg }
