@@ -2,9 +2,9 @@ import * as Koa from 'koa'
 import * as Router from 'koa-router'
 import * as bodyParser from 'koa-bodyparser'
 import connectDatabase from '../src/db/index'
-import { userReg } from '../src/user/index'
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import { userReg, userCode } from '../src/user/index'
 const app = new Koa()
 
 // const User = require('../db/user/user')
@@ -16,6 +16,7 @@ connectDatabase(dburl)
 // })
 app.use(bodyParser())
 router.post('/re', userReg)
+router.post('/code', userCode)
 app.use(router.routes()).use(router.allowedMethods())
 // Use connect method to connect to the server
 
