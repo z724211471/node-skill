@@ -3,6 +3,8 @@ import * as Router from 'koa-router'
 import * as bodyParser from 'koa-bodyparser'
 import connectDatabase from '../src/db/index'
 import { userReg } from '../src/user/index'
+import "reflect-metadata";
+import { createConnection } from "typeorm";
 const app = new Koa()
 
 // const User = require('../db/user/user')
