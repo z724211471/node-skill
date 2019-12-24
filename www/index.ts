@@ -14,6 +14,28 @@ let router = new Router()
 // app.use(async ctx => {
 //   ctx.body = 'Hello World'
 // })
+app.use(async (ctx, next) => {
+  ctx.set({
+      'Access-Control-Allow-Origin': '*', // 打开跨域
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept Authorization',
+  });
+  
+  // 如果前端设置了 XHR.setRequestHeader('Content-Type', 'application/json')
+  // ctx.set 就必须携带 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept Authorization'
+  // 如果前端设置了 XHR.setRequestHeader('Authorization', 'xxxx') 同样的就是上面 Authorization 字段
+  // 并且这里要转换一下状态码
+  if (ctx.request.method === 'OPTIONS') {
+      ctx.response.status = 200;
+  }
+  try {
+      await next();
+  } catch (err) {
+      ctx.response.status = err.statusCode || err.status || 500;
+      ctx.response.body = {
+          message: err.message
+      }
+  }
+})
 createConnection({
   type: "mysql",
   host: "localhost",
@@ -25,9 +47,8 @@ createConnection({
   synchronize: true,
   logging: false,
 }).then(rec=>{
-  console.log('成功',rec)
+ 
 }).catch(err=>{
-  console.log('失败',err)
 })
 app.use(bodyParser())
 
