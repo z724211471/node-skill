@@ -6,6 +6,8 @@ import { Users } from '../db/index'
 function userReg(ctx, res) {
   //   var mobile = ctx.body.username
   let body = ctx.request.body
+  console.log(ctx.header)
+  console.log(ctx.request)
   if (!body['username'] || !body['password']) {
     return (ctx.body = {
       code: 400,
