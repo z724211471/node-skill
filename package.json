@@ -7,7 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "ts-node www/index.ts",
     "serve": "nodemon"
-
   },
   "author": "",
   "license": "ISC",
@@ -18,12 +17,9 @@
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "mongoose": "^5.7.3",
-<<<<<<< HEAD
     "mysql": "^2.17.1",
     "reflect-metadata": "^0.1.13",
-=======
     "svg-captcha": "^1.4.0",
->>>>>>> 5f0fda5b726da8ea12b387a3476cd9a14f1d4566
     "ts-loader": "^6.2.0",
     "typeorm": "^0.2.20",
     "typescript": "^3.6.3"
