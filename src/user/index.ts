@@ -1,22 +1,25 @@
-import UserModel from '../db/user'
+
 import * as svgCaptcha from 'svg-captcha'
   
 import { getConnection, getRepository } from "typeorm";
 import { Users } from '../db/index'
-function userReg(ctx, res) {
+async function userReg(ctx, next) {
   //   var mobile = ctx.body.username
   let body = ctx.request.body
-  console.log(ctx.header)
-  console.log(ctx.request)
   if (!body['username'] || !body['password']) {
     return (ctx.body = {
       code: 400,
       msg: '用户名或密码不能为空'
     })
   }
- getConnection().createQueryBuilder().insert().into(Users).values([{name: body['username'], password: body['password']}])
- .execute().then(rec=>{
-  res.send({ code: 200, msg: "注册成功" });  
+  let userd=new Users()
+  userd.name=body['username']
+  userd.password=body['password']
+ await getRepository(Users).save(userd).then(rec=>{
+    console.log(rec)
+    ctx.body={ code: 200, msg: "注册成功" };  
+ }).catch(err=>{
+   console.log(err)
  })
   // return regUser
   //   .save()

@@ -6,6 +6,7 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import { userReg, userCode } from '../src/user/index'
 import { wxlogin } from '../src/user/wx'
+import {Users} from '../src/db/index'
 const app = new Koa()
 
 // const User = require('../db/user/user')
@@ -37,6 +38,7 @@ app.use(async (ctx, next) => {
       }
   }
 })
+console.log(__dirname)
 createConnection({
   type: "mysql",
   host: "localhost",
@@ -44,12 +46,13 @@ createConnection({
   username: "czy",
   password: "123456",
   database: "test",
-  entities:['../src/db/*.ts'],
+  entities:[Users],
   synchronize: true,
   logging: false,
 }).then(rec=>{
- 
+ console.log('成功吗')
 }).catch(err=>{
+
 })
 app.use(bodyParser())
 
