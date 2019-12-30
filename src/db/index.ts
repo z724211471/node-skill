@@ -21,4 +21,22 @@ export class Users {
 
   @Column()
   password: string
+  
+  @Column()
+  avatar: string
+
+  @Column()
+  sex: number
+
+  @Column()
+  token: string
+  
+  @Column()
+  phone: string
+
+  @Column()
+  wxinfo: string
+
+  @Column()
+  qqinfo: string
 }

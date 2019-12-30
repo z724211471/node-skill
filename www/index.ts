@@ -4,7 +4,7 @@ import * as bodyParser from 'koa-bodyparser'
 //import connectDatabase from '../src/db/index'
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { userReg, userCode } from '../src/user/index'
+import { userReg, userCode,userLogin } from '../src/user/index'
 import { wxlogin } from '../src/user/wx'
 import {Users} from '../src/db/index'
 const app = new Koa()
@@ -59,6 +59,7 @@ app.use(bodyParser())
 router.post('/re', userReg)
 router.post('/code', userCode)
 router.post('/wxlogin', wxlogin)
+router.post('/login', userLogin)
 app.use(router.routes()).use(router.allowedMethods())
 // Use connect method to connect to the server
 

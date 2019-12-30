@@ -57,4 +57,24 @@ function userCode(ctx) {
   ctx.body = captcha.data
 }
 
-export { userReg, userCode }
+
+async function userLogin(ctx,next) {
+
+  let body = ctx.request.body
+  if (!body['username'] || !body['password']) {
+    return (ctx.body = {
+      code: 400,
+      msg: '用户名或密码不能为空'
+    })
+  }
+  await getRepository(Users).findOne({name:body['username'],password:body['password']}).then(res=>{
+    console.log(res)
+    ctx.body={ code: 200,data:res, msg: "登录成功" }; 
+  })
+  
+}
+
+
+
+
+export { userReg, userCode,userLogin }
