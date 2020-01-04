@@ -63,6 +63,4 @@ router.post('/login', userLogin)
 app.use(router.routes()).use(router.allowedMethods())
 // Use connect method to connect to the server
 
-app.listen(3000, () => {
-  console.log('成功')
-})
+app.listen(3000, '0.0.0.0')
